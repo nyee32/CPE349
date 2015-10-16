@@ -1,0 +1,15 @@
+/**
+ *
+ * @author Nathan Yee
+ */
+public class vertex {
+  private int value;
+  private bool checked;
+
+  /**
+   * $params args the command line arguments
+   */
+  public static void main (String[] args) {
+    
+  }
+}

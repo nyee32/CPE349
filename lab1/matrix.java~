@@ -1,0 +1,20 @@
+/**
+ *
+ * @author Nathan Yee
+ */
+public class matrix {
+  /**
+   * $params args the command line arguments
+   */
+  public static void main (String[] args) {
+    
+  }
+
+  private static int[][] multiply(int[][]m1, int[][] m2) {
+
+    int size = m1[0][].length;
+
+    System.out.println(size)
+
+  }
+}
