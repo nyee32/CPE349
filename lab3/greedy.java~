@@ -1,0 +1,32 @@
+import java.util.*;
+import java.io.*;
+/**
+ *
+ * @author Nathan Yee
+ */
+public class greedy {
+  /**
+   * $params args the command line arguments
+   */
+  public static void main (String[] args) throws FileNotFoundException {
+    Scanner in = new Scanner(new File(args[0]));
+    ArrayList<ArrayList<Integer>> camper = new ArrayList<ArrayList<Integer>>();
+
+    while (in.hasNextLine()) {
+      String[] tmp = (in.nextLine()).split("[[^(]+,[^)]]+");
+      System.out.println(tmp[0]);
+      ArrayList<Integer> times = new ArrayList<Integer>();
+
+      for (int i = 0; i < tmp.length; i++) {
+	times.add(Integer.valueOf(tmp[i]));
+      }
+
+      camper.add(times);
+
+    }
+
+    System.out.println(camper);
+
+  }
+
+}
