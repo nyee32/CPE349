@@ -5,6 +5,12 @@ import java.io.*;
  * @author Nathan Yee
  */
 public class greedy {
+
+  private static int starttime = 0;
+  private static ArrayList<ArrayList<Integer>> finalList =
+    new ArrayList<ArrayList<Integer>>();
+
+
   /**
    * $params args the command line arguments
    */
@@ -18,7 +24,7 @@ public class greedy {
 
     while (in.hasNextInt()) {
       player = in.nextInt();
-      System.out.println("player: " + player);
+      //System.out.println("player: " + player);
       ArrayList<Integer> times = new ArrayList<Integer>();
       for (int i = 0; i < 3; i++) {
 	if (in.hasNextInt()) {
@@ -26,47 +32,70 @@ public class greedy {
 	  time +=tmp;
 	  times.add(tmp);
 	}
-	//System.out.println(times);
       }
       times.add(player);
       camper.add(times);
     }
 
     getShortestSeq(camper);
+    getShortestTime(finalList);
 
-    // System.out.println(camper.get(0));
-    // System.out.println(camper.get(1));
-    // System.out.println(camper.get(2));
-    System.out.println("Completion time: " + time);
   }
 
-  private void getShortestTime() {
+  static private void getShortestTime(ArrayList<ArrayList<Integer>> campers) {
+    int totalTime = 0;
+
+    for (int i = 0; i < campers.size(); i++) {
+      starttime+=campers.get(i).get(0);
+      int tmp = starttime + campers.get(i).get(1) + campers.get(i).get(2);
+      if (tmp > totalTime) {
+	totalTime = tmp;
+	//System.out.println("Possible Length is = " + totalTime);
+      }
+
+    }
+    System.out.println("Completion time: " + totalTime);
+
 
   }
 
   static private void getShortestSeq(ArrayList<ArrayList<Integer>> campers) {
     int slowestP = -1;
     int largestVal = 0;
+    int slowestInx = -1;
+    int largestInx = -1;
     int remove = -1;
     int campersSize = campers.size();
     ArrayList<Integer> sequence = new ArrayList<Integer>();
 
     while (sequence.size() < campersSize) {
-      System.out.println("size = " + sequence.size());
-      System.out.println("sizec = " + campers.size());
+      //System.out.println("size = " + sequence.size());
+      //System.out.println("sizec = " + campers.size());
 
       for (int i = 0; i < campers.size(); i++) {
-	System.out.println("got = " + campers.get(i) + " " + (campers.get(i).get(1) + campers.get(i).get(2)));
+	//System.out.println("got = " + campers.get(i) + " " +
+	//		   (campers.get(i).get(1) + campers.get(i).get(2)));
+
 	if ((campers.get(i).get(1) + campers.get(i).get(2)) > largestVal) {
 	  largestVal = campers.get(i).get(1) + campers.get(i).get(2);
 	  slowestP = campers.get(i).get(3);
 	  remove = i;
 	}
+	else if ((campers.get(i).get(1) + campers.get(i).get(2)) ==
+		 largestVal) {
+	  if (campers.get(remove).get(0) > campers.get(i).get(0)) {
+	    largestVal = campers.get(i).get(1) + campers.get(i).get(2);
+	    slowestP = campers.get(i).get(3);
+	    remove = i;
+	  }
+
+	}
       }
 
       if (slowestP != -1) {
-	System.out.println("Adding... " + slowestP);
+	//System.out.println("Adding... " + slowestP);
 	sequence.add(slowestP);
+	finalList.add(campers.get(remove));
 	if (remove != -1) {
 	  campers.remove(remove);
 	}
@@ -79,12 +108,5 @@ public class greedy {
     System.out.println("Sequence: " + sequence);
 
   }
-
-  //completeion time is the shotest time to complete the tri
-  //keep track of where the start time; start time is the sum of all the swim 
-  //times then add the complete time to the starttime; the longest time is the
-  //completion time
-  // order is based off non swim times
-
 
 }
