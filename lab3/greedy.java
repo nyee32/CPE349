@@ -50,12 +50,10 @@ public class greedy {
       int tmp = starttime + campers.get(i).get(1) + campers.get(i).get(2);
       if (tmp > totalTime) {
 	totalTime = tmp;
-	//System.out.println("Possible Length is = " + totalTime);
       }
 
     }
     System.out.println("Completion time: " + totalTime);
-
 
   }
 
@@ -80,14 +78,6 @@ public class greedy {
 	  largestVal = campers.get(i).get(1) + campers.get(i).get(2);
 	  slowestP = campers.get(i).get(3);
 	  remove = i;
-	}
-	else if ((campers.get(i).get(1) + campers.get(i).get(2)) ==
-		 largestVal) {
-	  if (campers.get(remove).get(0) > campers.get(i).get(0)) {
-	    largestVal = campers.get(i).get(1) + campers.get(i).get(2);
-	    slowestP = campers.get(i).get(3);
-	    remove = i;
-	  }
 
 	}
       }
