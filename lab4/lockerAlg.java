@@ -157,9 +157,11 @@ public class lockerAlg {
     int tmpLocker = locker - 1;
 
     for (int i = 0; i < keyCnt; i++) {
+      System.out.println("table val = " + table[i][tmpLocker]);
       if (table[i][tmpLocker] < shortest && table[i][tmpLocker] > 0) {
 	shortest = table[i][tmpLocker];
 	smallestKey = i;
+	System.out.println("value = " + shortest);
       }
     }
 
@@ -205,7 +207,7 @@ public class lockerAlg {
 
 	//System.out.println("Key = " +keys.get(key));
 	// if key is in front of locker i
-	if (keys.get(key) < locker + 1) {
+	if (keys.get(key) < list.get(locker).num) {
 
 	  tmpPath = getPath(keys.get(key), locker + 1);
 
@@ -222,7 +224,7 @@ public class lockerAlg {
 
 	  list.get(locker).path = tmpPath;
 	}
-	else if (keys.get(key) >= locker + 1) {
+	else if (keys.get(key) >= list.get(locker).num) {
 
 	  if (locker != 0 && list.get(locker - 1).ball) {
 	    System.out.println("Next to ball");
@@ -240,10 +242,10 @@ public class lockerAlg {
 	      leftLockerKey = getKeyShortestPath(leftLocker);
 
 
-	      System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker]);
+	      System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker - 1] + " locker = " + leftLocker);
 
 	      table[key][locker] +=
-		table[leftLockerKey][leftLocker];
+		table[leftLockerKey][leftLocker - 1];
 
 	      if (tmpPath.contains(leftLockerKey)) {
 		table[key][locker]--;
