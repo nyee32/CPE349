@@ -1,0 +1,25 @@
+import java.io.*;
+import java.util.*;
+
+public class lockerAlg {
+
+
+  public void main(String[] args) {
+
+
+  }
+
+  private void readFile (String file) {
+    int lockers = 0;
+    int numOfKeys = 0;
+    int tBCnt 0;
+    Scanner sc = new Scanner(new File(args[0]));
+
+    lockers = sc.nextInt();
+    numOkKeys = sc.nextInt();
+    tBCnt = sc.nextInt();
+
+
+  }
+
+}
