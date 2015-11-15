@@ -184,6 +184,17 @@ public class lockerAlg {
 
   }
 
+
+  private void minDist(HashSet<Integer> path, int prev, int leftMost) {
+
+    
+
+
+
+
+  }
+
+
   private void resetPath() {
 
     for (int i = 1; i < list.size(); i++) {
@@ -233,28 +244,45 @@ public class lockerAlg {
 	    list.get(locker).path = list.get(locker - 1).path;
 	  }
 	  else {
-	    tmpPath = getPath(keys.get(key), locker + 1);
 
-	    table[key][locker] = tmpPath.size();
-	    leftLocker = getLeftLockerWithBall(list.get(locker).num);
-	    //System.out.println("left = " + leftLocker);
-
-	    if (leftLocker != -1) {
-	      leftLockerKey = getKeyShortestPath(leftLocker);
+	    table[key][locker] = 
 
 
-	      System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker - 1] + " leftlocker = " + leftLocker + " locker = " + (locker+1));
 
-	      table[key][locker] +=
-		table[leftLockerKey][leftLocker - 1];
 
-	      if (tmpPath.contains(leftLockerKey)) {
-		table[key][locker]--;
-	      }
 
-	    }
 
-	    list.get(locker).path = tmpPath;
+
+
+
+
+
+
+
+
+
+	    // tmpPath = getPath(keys.get(key), locker + 1);
+
+	    // table[key][locker] = tmpPath.size();
+	    // leftLocker = getLeftLockerWithBall(list.get(locker).num);
+	    // //System.out.println("left = " + leftLocker);
+
+	    // if (leftLocker != -1) {
+	    //   leftLockerKey = getKeyShortestPath(leftLocker);
+
+
+	    //   System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker - 1] + " leftlocker = " + leftLocker + " locker = " + (locker+1));
+
+	    //   table[key][locker] +=
+	    // 	table[leftLockerKey][leftLocker - 1];
+
+	    //   if (tmpPath.contains(leftLockerKey)) {
+	    // 	table[key][locker]--;
+	    //   }
+
+	    // }
+
+	    // list.get(locker).path = tmpPath;
 	  }
 
 	}
