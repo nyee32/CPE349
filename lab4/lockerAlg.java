@@ -54,14 +54,14 @@ public class lockerAlg {
     }
     Collections.sort(keys);
 
-    System.out.println("keys = " +keys);
+    //System.out.println("keys = " +keys);
 
     for (int k = 0; k < tBCnt; k++) {
       tb.add(sc.nextInt());
     }
 
     Collections.sort(tb);
-    System.out.println("Tennisballs = " + tb);
+    //System.out.println("Tennisballs = " + tb);
 
     //Setup table with locker count
     for (int i = 1; i <= lockers; i++) {
@@ -137,16 +137,16 @@ public class lockerAlg {
   }
 
   private int getLeftLockerWithBall (int l) {
-    int end = l - 1;
+    int end = l - 2;
 
     while (end >= 0) {
-      System.out.println("getting locker = " + list.get(end).num);
+      // System.out.println("getting locker = " + list.get(end).num);
       if (list.get(end).ball) {
 	return list.get(end).num;
       }
       end--;
     }
-    System.out.println("end = " + end);
+    //System.out.println("end = " + end);
     return -1;
 
   }
@@ -157,11 +157,11 @@ public class lockerAlg {
     int tmpLocker = locker - 1;
 
     for (int i = 0; i < keyCnt; i++) {
-      System.out.println("table val = " + table[i][tmpLocker]);
+      //System.out.println("table val = " + table[i][tmpLocker]);
       if (table[i][tmpLocker] < shortest && table[i][tmpLocker] > 0) {
 	shortest = table[i][tmpLocker];
 	smallestKey = i;
-	System.out.println("value = " + shortest);
+	//System.out.println("value = " + shortest);
       }
     }
 
@@ -202,19 +202,19 @@ public class lockerAlg {
 
       for (int locker = 0; locker < lockerCnt; locker++) {
 
-	System.out.println("locker = "+ (locker+1) + " " + "key = "
-			   + keys.get(key));
+	//System.out.println("locker = "+ (locker+1) + " " + "key = "
+	//		   + keys.get(key));
 
 	//System.out.println("Key = " +keys.get(key));
 	// if key is in front of locker i
 	if (keys.get(key) < list.get(locker).num) {
 
-	  tmpPath = getPath(keys.get(key), locker + 1);
+	  tmpPath = getPath(keys.get(key), list.get(locker).num);
 
 	  //System.out.println("locker = "+ (locker+1) + " " + "key = "
 	  //		     + keys.get(key) + " path = " + tmpPath);
 
-	  if (isValidPath(tmpPath, locker)) {
+	  if (isValidPath(tmpPath, list.get(locker).num)) {
 	    table[key][locker] = tmpPath.size();
 	  }
 	  else {
@@ -225,6 +225,7 @@ public class lockerAlg {
 	  list.get(locker).path = tmpPath;
 	}
 	else if (keys.get(key) >= list.get(locker).num) {
+	  System.out.println("Key is larger");
 
 	  if (locker != 0 && list.get(locker - 1).ball) {
 	    System.out.println("Next to ball");
@@ -235,14 +236,14 @@ public class lockerAlg {
 	    tmpPath = getPath(keys.get(key), locker + 1);
 
 	    table[key][locker] = tmpPath.size();
-	    leftLocker = getLeftLockerWithBall(locker);
-	    System.out.println("left = " + leftLocker);
+	    leftLocker = getLeftLockerWithBall(list.get(locker).num);
+	    //System.out.println("left = " + leftLocker);
 
 	    if (leftLocker != -1) {
 	      leftLockerKey = getKeyShortestPath(leftLocker);
 
 
-	      System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker - 1] + " locker = " + leftLocker);
+	      System.out.println(table[key][locker] + " + " + table[leftLockerKey][leftLocker - 1] + " leftlocker = " + leftLocker + " locker = " + (locker+1));
 
 	      table[key][locker] +=
 		table[leftLockerKey][leftLocker - 1];
@@ -279,8 +280,10 @@ public class lockerAlg {
       System.out.print(keys.get(key) + "= ");
       for (int locker = 0; locker < lockerCnt; locker++) {
 
-	//System.out.print((locker+1)+ ":" + table[key][locker] + " ");
-	System.out.print(table[key][locker] + " ");
+	//if (locker == 138) {
+	System.out.print((locker+1)+ ":" + table[key][locker] + " ");
+	//System.out.print(table[key][locker] + " ");
+	//}
       }
       System.out.println("");
     }
